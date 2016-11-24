@@ -1,0 +1,13 @@
+twitter:
+  messages: 
+    - 'Could you please check the date on your watches? It may require some adjustment...'
+    - 'Your mechanical watches might require date adjustment. Could you please check that?'
+    - 'Date on your watches might be incorrect. Could you please check if it requires adjustment?'
+    
+# every first date of month
+  cron: '0 0 9 1/1 * *'  
+  account:
+    consumerKey: cKey
+    consumerSecret: cSecret 
+    accessToken: token
+    accessTokenSecret: tokenSekret
