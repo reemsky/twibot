@@ -1,7 +1,7 @@
 
 Simple twitter bot that posts message from application.yml every provided period.
 
-### How do I get set up? ###
+### Setup ###
 
 * set application parameters in application.yml
 * mvn package
