@@ -17,7 +17,7 @@ public class App extends LogEnabledClass{
 	}
 	
 	@Scheduled(cron="${twitter.cron}") // e
-	public void everyDay() {
+	public void runTask() {
 		log.info("Scheduled task started");
 		poster.post();
 	}
