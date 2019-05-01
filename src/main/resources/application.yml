@@ -10,4 +10,4 @@ twitter:
     consumerKey: cKey
     consumerSecret: cSecret 
     accessToken: token
-    accessTokenSecret: tokenSekret
+    accessTokenSecret: tokenSecret
