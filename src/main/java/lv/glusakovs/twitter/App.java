@@ -16,10 +16,9 @@ public class App extends LogEnabledClass{
 		SpringApplication.run(App.class, args);
 	}
 	
-	@Scheduled(cron="${twitter.cron}") // e
+	@Scheduled(cron="${twitter.cron}")
 	public void runTask() {
 		log.info("Scheduled task started");
 		poster.post();
 	}
 }
-
