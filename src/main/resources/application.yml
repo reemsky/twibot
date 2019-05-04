@@ -8,7 +8,7 @@ twitter:
 # every first date of month
 #cron: '0 0 9 1/1 * *'
 # everyday at 09:00
-  cron: '0 0 9 * * *'  
+  cron: '0 * * * * *'  
   account:
     consumerKey: cKey
     consumerSecret: cSecret 
