@@ -1,11 +1,12 @@
 package lv.glusakovs.twitter;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.social.DuplicateStatusException;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.social.twitter.api.impl.TwitterTemplate;
-import org.springframework.social.DuplicateStatusException;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -28,10 +29,21 @@ public class MessagePoster extends LogEnabledClass {
 
 		messages = cfg.getMessages();
 		message = messages.get(index);
+		String s;
+				
+		LocalDate date 	= LocalDate.now();
 		
-		// Today is DD of Month Year.  + message from list
+		String 	weekday 	= date.getDayOfWeek().toString();
+		String 	month 		= date.getMonth().toString();
+		int 	day 		= date.getDayOfMonth();
 		
-		log.info(message);
+		s  = "Today is " + weekday;
+		s += ", " + month;
+		s += " " + day + ". "; 
+		
+		// Today is Day, DD of Month Year.  + message from list
+		
+		log.info(s + message);
 
 		/*
 		Twitter twitter = new TwitterTemplate(acc.getConsumerKey(), acc.getConsumerSecret(), acc.getAccessToken(),
@@ -42,7 +54,6 @@ public class MessagePoster extends LogEnabledClass {
 			log.info("Twitter rejects duplicate message");
 		}
 		*/
-
 		nextMessage(messages.size() - 1);
 	}
 
