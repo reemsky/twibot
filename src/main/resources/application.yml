@@ -3,9 +3,12 @@ twitter:
     - 'Could you please check the date on your watches? It may require some adjustment...'
     - 'Your mechanical watches might require date adjustment. Could you please check that?'
     - 'Date on your watches might be incorrect. Could you please check if it requires adjustment?'
-    
+
+#The pattern is a list of six single space-separated fields: representing second, minute, hour, day, month, weekday    
 # every first date of month
-  cron: '0 0 9 1/1 * *'  
+#cron: '0 0 9 1/1 * *'
+# everyday at 09:00
+  cron: '0 0 9 * * *'  
   account:
     consumerKey: cKey
     consumerSecret: cSecret 

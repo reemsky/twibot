@@ -28,8 +28,12 @@ public class MessagePoster extends LogEnabledClass {
 
 		messages = cfg.getMessages();
 		message = messages.get(index);
+		
+		// Today is DD of Month Year.  + message from list
+		
 		log.info(message);
 
+		/*
 		Twitter twitter = new TwitterTemplate(acc.getConsumerKey(), acc.getConsumerSecret(), acc.getAccessToken(),
 				acc.getAccessTokenSecret());
 		try {
@@ -37,6 +41,7 @@ public class MessagePoster extends LogEnabledClass {
 		} catch (DuplicateStatusException dte) {
 			log.info("Twitter rejects duplicate message");
 		}
+		*/
 
 		nextMessage(messages.size() - 1);
 	}
