@@ -13,6 +13,9 @@ Simple twitter bot that posts message from application.yml every provided period
 --twitter.account.accessToken="ccc" 
 --twitter.account.accessTokenSecret="ddd"
 
-
+Docker:
 * docker build -t twibot .
 * docker run -d --name my-bot twibot
+
+* docker build -t twibot . && docker run --name mybot -e TWITTER_CRON="0 * * * * *" twibot
+
