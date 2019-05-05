@@ -29,6 +29,6 @@ WORKDIR $APP_HOME
 #Copy executable jar file from the builder image
 COPY --from=builder /build/target/*.jar app.jar
 #ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar app.jar" ]
-ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -jar app.jar" ]
+#ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -jar app.jar" ]
 #Second option using shell form:
-#ENTRYPOINT exec java $JAVA_OPTS -jar app.jar $0 $@
+ENTRYPOINT exec java $JAVA_OPTS -jar app.jar $0 $@
