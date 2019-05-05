@@ -27,6 +27,7 @@ public class MessagePoster extends LogEnabledClass {
 			return;
 		}
 
+		log.info(acc);
 		messages = cfg.getMessages();
 		message = messages.get(index);
 		String s;
