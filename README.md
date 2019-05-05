@@ -14,7 +14,6 @@ Simple twitter bot that posts message from application.yml every provided period
 --twitter.account.accessTokenSecret="ddd"
 
 Docker:
-* docker build -t twibot . && docker run -dti --name mybot -e TWITTER_CRON="*/10 * * * * *" -e TWITTER_ACCOUNT_CONSUMERKEY="12" -e TWITTER_ACCOUNT_CONSUMERSECRET="34" -e TWITTER_ACCOUNT_ACCESSTOKEN="56" -e TWITTER_ACCOUNT_ACCESSTOKENSECRET="78" twibot
+* docker build -t twibot . && docker run -dti --name mybot -e TZ=Europe/Riga -e TWITTER_CRON="*/10 * * * * *" -e TWITTER_ACCOUNT_CONSUMERKEY="12" -e TWITTER_ACCOUNT_CONSUMERSECRET="34" -e TWITTER_ACCOUNT_ACCESSTOKEN="56" -e TWITTER_ACCOUNT_ACCESSTOKENSECRET="78" twibot
 * docker attach mybot
 * Ctrl P+Q will detach from session
-
