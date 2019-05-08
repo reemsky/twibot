@@ -20,8 +20,8 @@ ENV JAVA_OPTS=""
 #Create base app folder
 RUN mkdir $APP_HOME
 #Create folder with application logs
-RUN mkdir $APP_HOME/log
-VOLUME $APP_HOME/log
+RUN mkdir $APP_HOME/logs
+VOLUME $APP_HOME/logs
 WORKDIR $APP_HOME
 #Copy executable jar file from the builder image
 COPY --from=builder /build/target/*.jar app.jar
