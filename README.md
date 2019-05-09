@@ -33,4 +33,6 @@ To run with default parameters:
 
 To run with custom parameters:
 * docker run -dti --name mybot -e TZ=Europe/Riga -e TWITTER_CRON="*/10 * * * * *" -e TWITTER_ACCOUNT_CONSUMERKEY="12" -e TWITTER_ACCOUNT_CONSUMERSECRET="34" -e TWITTER_ACCOUNT_ACCESSTOKEN="56" -e TWITTER_ACCOUNT_ACCESSTOKENSECRET="78" twibot
+
+To login to container later use:
 * docker exec -ti mybot /bin/bash
