@@ -11,7 +11,7 @@ To run with default parameters:
 * mvn package spring-boot:run
 
 To run with custom parameters:
-* mvn package spring-boot:run *to be added later*
+* mvn spring-boot:run -Dspring-boot.run.arguments=--twitter.cron="*/10 * * * * *",--twitter.account.consumerKey=12,--twitter.account.consumerSecret=34,--twitter.account.accessToken=56,--twitter.account.accessTokenSecret=78
 
 ## Java
 To run with default parameters:
