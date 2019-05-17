@@ -3,6 +3,11 @@ package lv.glusakovs.twitter;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.xml.bind.DatatypeConverter;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.DuplicateStatusException;
 import org.springframework.social.twitter.api.Twitter;
@@ -43,8 +48,20 @@ public class MessagePoster extends LogEnabledClass {
 		s += " " + day + ". "; 
 		
 		// Today is Day, DD of Month Year.  + message from list
-		
-		log.info(s + message);
+		String result = s + message;
+		log.info(result);
+	
+		String sha256 = "Not defined";
+		try {
+			MessageDigest md = MessageDigest.getInstance("SHA-256");
+			byte[] digest = md.digest(result.getBytes(StandardCharsets.UTF_8));
+			sha256 = DatatypeConverter.printHexBinary(digest).toLowerCase();
+		} catch (NoSuchAlgorithmException e) {
+			log.error("Error getting SHA-256 MessageDigest instance");
+			e.printStackTrace();
+		}
+		log.debug("Message length is: " + result.length() + ", SHA-256: " + sha256);
+        
 
 		/*
 		Twitter twitter = new TwitterTemplate(acc.getConsumerKey(), acc.getConsumerSecret(), acc.getAccessToken(),
