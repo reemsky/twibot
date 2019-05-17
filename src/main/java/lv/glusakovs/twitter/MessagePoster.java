@@ -1,14 +1,16 @@
 package lv.glusakovs.twitter;
 
-import java.time.LocalDate;
-
-import javax.xml.bind.DatatypeConverter;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDate;
+
+import javax.xml.bind.DatatypeConverter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.DuplicateStatusException;
+import org.springframework.social.MissingAuthorizationException;
+import org.springframework.social.twitter.api.MessageTooLongException;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.social.twitter.api.impl.TwitterTemplate;
 import org.springframework.stereotype.Component;
@@ -18,31 +20,31 @@ public class MessagePoster extends LogEnabledClass {
 	@Autowired
 	private Config cfg;
 	private static int index = 0; // variable for message rotation
+	final String hashMethod = "MD5";
 	
 	public void post() {
 
 		TwitterAccount acc = cfg.getAccount();
-
+		log.info(acc.toString());
+		
 		if (!acc.isValid()) {
 			log.error(acc + "; valid:" + String.valueOf(acc.isValid()));
 			log.info("Account is invalid. Message will not be posted.");
 			return;
 		}
 
-		log.info(acc.toString());
-
 		String msg = getMessageToPost();
+		
 		log.info(msg);
-		log.debug("Message length is: " + msg.length() + ", SHA-256: " + getMessageSHA(msg));
-		/*
-		Twitter twitter = new TwitterTemplate(acc.getConsumerKey(), acc.getConsumerSecret(), acc.getAccessToken(),
-				acc.getAccessTokenSecret());
+		log.debug("Message length is: " + msg.length() + ", " + hashMethod + getStringHash(msg, hashMethod));
+		
+		Twitter twitter = new TwitterTemplate(acc.getConsumerKey(), acc.getConsumerSecret(), acc.getAccessToken(), acc.getAccessTokenSecret());
 		try {
-			twitter.timelineOperations().updateStatus(message);
-		} catch (DuplicateStatusException dte) {
-			log.info("Twitter rejects duplicate message");
+			twitter.timelineOperations().updateStatus(msg);
+		} catch (DuplicateStatusException|MessageTooLongException|MissingAuthorizationException e) {
+			log.error(e.getMessage());
+			e.printStackTrace();
 		}
-		*/
 		
 		nextMessage();
 	}
@@ -60,14 +62,14 @@ public class MessagePoster extends LogEnabledClass {
 		return result;
 	} 
 	
-	private String getMessageSHA(String s){
+	private String getStringHash(String s, String method){
 		String sha256 = "Not defined";
 		try {
-			MessageDigest md = MessageDigest.getInstance("SHA-256");
+			MessageDigest md = MessageDigest.getInstance(method);
 			byte[] digest = md.digest(s.getBytes(StandardCharsets.UTF_8));
 			sha256 = DatatypeConverter.printHexBinary(digest).toLowerCase();
 		} catch (NoSuchAlgorithmException e) {
-			log.error("Error getting SHA-256 MessageDigest instance");
+			log.error("Error getting " + method + " MessageDigest instance");
 			e.printStackTrace();
 		}
 		return sha256;
