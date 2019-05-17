@@ -9,7 +9,7 @@ import javax.xml.bind.DatatypeConverter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.DuplicateStatusException;
-import org.springframework.social.MissingAuthorizationException;
+import org.springframework.social.NotAuthorizedException;
 import org.springframework.social.twitter.api.MessageTooLongException;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.social.twitter.api.impl.TwitterTemplate;
@@ -41,9 +41,8 @@ public class MessagePoster extends LogEnabledClass {
 		Twitter twitter = new TwitterTemplate(acc.getConsumerKey(), acc.getConsumerSecret(), acc.getAccessToken(), acc.getAccessTokenSecret());
 		try {
 			twitter.timelineOperations().updateStatus(msg);
-		} catch (DuplicateStatusException|MessageTooLongException|MissingAuthorizationException e) {
+		} catch (DuplicateStatusException|MessageTooLongException|NotAuthorizedException e) {
 			log.error(e.getMessage());
-			e.printStackTrace();
 		}
 		
 		nextMessage();
