@@ -15,7 +15,8 @@ twitter:
 # cron: '0 * * * * *'
 
 # every 10 seconds
-  cron: '*/10 * * * * *'
+#cron: '*/10 * * * * *'
+  cron: '0 0 9 * * *'
   account:
     consumerKey: cKey
     consumerSecret: cSecret 
